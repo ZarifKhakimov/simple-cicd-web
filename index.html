@@ -114,12 +114,14 @@
     const chat = document.getElementById("chat");
 
     const messages = [
-      "Hey there 👋",
-      "I'm Zarifjon, student of Millat Umidi University",
-      "This website demonstrates Continuous Deployment",
-      "When I update the code, users can see changes live",
-      "~ Z."
-    ];
+  "Hey there 👋",
+  "I'm Zarifjon, student of Millat Umidi University",
+  "This website demonstrates Continuous Deployment",
+  "When I update the code, users can see changes live",
+  "You can contact me <a href='https://t.me/kagetsu07' target='_blank' class='link'>Telegram</a>",
+  "Have a nice day!",
+  "~ Z."
+   ];
 
     function createBubble() {
       const bubble = document.createElement("div");
@@ -132,21 +134,32 @@
     }
 
     function typeText(element, text, speed = 45) {
-      return new Promise((resolve) => {
-        let i = 0;
-        function type() {
-          if (i < text.length) {
-            element.innerHTML = text.substring(0, i + 1);
-            i++;
-            setTimeout(type, speed);
-          } else {
-            element.style.borderRight = "none";
-            resolve();
-          }
-        }
-        type();
-      });
+  return new Promise((resolve) => {
+    let i = 0;
+    let isTag = false;
+    let output = "";
+
+    function type() {
+      if (i < text.length) {
+        let char = text[i];
+
+        if (char === "<") isTag = true;
+        if (char === ">") isTag = false;
+
+        output += char;
+        element.innerHTML = output;
+
+        i++;
+
+        setTimeout(type, isTag ? 0 : speed);
+      } else {
+        element.style.borderRight = "none";
+        resolve();
+      }
     }
+    type();
+  });
+}
 
     function createDotsBubble() {
       const bubble = document.createElement("div");
