@@ -1,0 +1,15 @@
+body {
+  background: black;
+}
+
+.link {
+  color: #1e7bff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.link:hover {
+  color: #4da3ff;
+  text-decoration: underline;
+}
