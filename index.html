@@ -176,20 +176,22 @@
     }
 
     async function showSequence() {
-      for (let msg of messages) {
-        const dots = createDotsBubble();
-        await new Promise((r) => setTimeout(r, 900));
-        dots.remove();
+  for (let msg of messages) {
+    const dots = createDotsBubble();
+    await new Promise((r) => setTimeout(r, 600));
+    dots.remove();
 
-        const { bubble, span } = createBubble();
-        setTimeout(() => bubble.classList.add("show"), 50);
+    const { bubble, span } = createBubble();
 
-        await new Promise((r) => setTimeout(r, 500));
-        await typeText(span, msg);
-        await new Promise((r) => setTimeout(r, 450));
-      }
-    }
+    // show bubble
+    setTimeout(() => bubble.classList.add("show"), 50);
 
+    // instant text (NO typing)
+    span.innerHTML = msg;
+
+    await new Promise((r) => setTimeout(r, 800));
+  }
+}
     showSequence();
   </script>
 </body>
